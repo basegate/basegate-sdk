@@ -15,7 +15,7 @@ import {
   FIVE,
   FEES_NUMERATOR,
   FEES_DENOMINATOR,
-  ChainId
+  ChainId,
 } from '../constants'
 import { sqrt, parseBigintIsh } from '../utils'
 import { InsufficientReservesError, InsufficientInputAmountError } from '../errors'
@@ -41,7 +41,7 @@ export class Pair {
           FACTORY_ADDRESS_MAP[token0.chainId],
           keccak256(['bytes'], [pack(['address', 'address'], [token0.address, token1.address])]),
           INIT_CODE_HASH_MAP[token0.chainId]
-        )
+        ),
       }
     }
 
@@ -56,8 +56,8 @@ export class Pair {
       tokenAmounts[0].token.chainId,
       Pair.getAddress(tokenAmounts[0].token, tokenAmounts[1].token),
       18,
-      'Cake-LP',
-      'Pancake LPs'
+      'BaseGate-LP',
+      'BaseGate LPs'
     )
     this.tokenAmounts = tokenAmounts as [TokenAmount, TokenAmount]
   }
