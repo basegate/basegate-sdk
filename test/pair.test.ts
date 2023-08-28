@@ -1,12 +1,12 @@
 import { ChainId, Token, Pair, TokenAmount, WETH, Price } from '../src'
 
 describe('Pair', () => {
-  const USDC = new Token(ChainId.MAINNET, '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA', 18, 'USDC', 'USD Coin')
-  const DAI = new Token(ChainId.MAINNET, '0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb', 18, 'DAI', 'DAI Stablecoin')
+  const USDC = new Token(ChainId.BASE_MAINNET, '0xd9aAEc86B65D86f6A7B5B1b0c42FFA531710b6CA', 18, 'USDC', 'USD Coin')
+  const DAI = new Token(ChainId.BASE_MAINNET, '0x50c5725949A6F0c72E6C4a641F24049A917DB0Cb', 18, 'DAI', 'DAI Stablecoin')
 
   describe('constructor', () => {
     it('cannot be used for tokens on different chains', () => {
-      expect(() => new Pair(new TokenAmount(USDC, '100'), new TokenAmount(WETH[ChainId.TESTNET], '100'))).toThrow(
+      expect(() => new Pair(new TokenAmount(USDC, '100'), new TokenAmount(WETH[ChainId.BASE_TESTNET], '100'))).toThrow(
         'CHAIN_IDS'
       )
     })
@@ -81,7 +81,7 @@ describe('Pair', () => {
     })
 
     it('throws if invalid token', () => {
-      expect(() => pair.priceOf(WETH[ChainId.MAINNET])).toThrow('TOKEN')
+      expect(() => pair.priceOf(WETH[ChainId.BASE_MAINNET])).toThrow('TOKEN')
     })
   })
 
@@ -97,22 +97,22 @@ describe('Pair', () => {
 
     it('throws if not in the pair', () => {
       expect(() =>
-        new Pair(new TokenAmount(DAI, '101'), new TokenAmount(USDC, '100')).reserveOf(WETH[ChainId.MAINNET])
+        new Pair(new TokenAmount(DAI, '101'), new TokenAmount(USDC, '100')).reserveOf(WETH[ChainId.BASE_MAINNET])
       ).toThrow('TOKEN')
     })
   })
 
   describe('#chainId', () => {
     it('returns the token0 chainId', () => {
-      expect(new Pair(new TokenAmount(USDC, '100'), new TokenAmount(DAI, '100')).chainId).toEqual(ChainId.MAINNET)
-      expect(new Pair(new TokenAmount(DAI, '100'), new TokenAmount(USDC, '100')).chainId).toEqual(ChainId.MAINNET)
+      expect(new Pair(new TokenAmount(USDC, '100'), new TokenAmount(DAI, '100')).chainId).toEqual(ChainId.BASE_MAINNET)
+      expect(new Pair(new TokenAmount(DAI, '100'), new TokenAmount(USDC, '100')).chainId).toEqual(ChainId.BASE_MAINNET)
     })
   })
   describe('#involvesToken', () => {
     expect(new Pair(new TokenAmount(USDC, '100'), new TokenAmount(DAI, '100')).involvesToken(USDC)).toEqual(true)
     expect(new Pair(new TokenAmount(USDC, '100'), new TokenAmount(DAI, '100')).involvesToken(DAI)).toEqual(true)
     expect(
-      new Pair(new TokenAmount(USDC, '100'), new TokenAmount(DAI, '100')).involvesToken(WETH[ChainId.MAINNET])
+      new Pair(new TokenAmount(USDC, '100'), new TokenAmount(DAI, '100')).involvesToken(WETH[ChainId.BASE_MAINNET])
     ).toEqual(false)
   })
 })

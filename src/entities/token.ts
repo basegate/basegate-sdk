@@ -66,20 +66,20 @@ export function currencyEquals(currencyA: Currency, currencyB: Currency): boolea
 }
 
 export const WETH = {
-  [ChainId.MAINNET]: new Token(
-    ChainId.MAINNET,
-    '0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
+  [ChainId.BASE_MAINNET]: new Token(
+    ChainId.BASE_MAINNET,
+    '0x4200000000000000000000000000000000000006',
     18,
-    'WBNB',
-    'Wrapped BNB',
-    'https://www.binance.org'
+    'WETH',
+    'Wrapped Ether',
+    'https://weth.io'
   ),
-  [ChainId.TESTNET]: new Token(
-    ChainId.TESTNET,
+  [ChainId.BASE_TESTNET]: new Token(
+    ChainId.BASE_TESTNET,
     '0xae13d989daC2f0dEbFf460aC112a837C89BAa7cd',
     18,
-    'WBNB',
-    'Wrapped BNB',
-    'https://www.binance.org'
+    'WETH',
+    'Wrapped Ether',
+    'https://weth.io'
   )
 }
